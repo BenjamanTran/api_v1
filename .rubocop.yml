@@ -1,0 +1,75 @@
+inherit_from: .rubocop_todo.yml
+
+inherit_gem:
+  rubocop-rails_config:
+    - config/rails.yml
+AllCops:
+  TargetRubyVersion: 3.3.1
+  TargetRailsVersion: 7.1.3
+
+  DisabledByDefault: true
+  NewCops: enable
+
+  Exclude:
+    - '**/templates/**/*'
+    - '**/vendor/**/*'
+    - '**/client/node_modules/**/*'
+    - 'node_modules/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+
+Metrics:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 256
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Lint/Debugger:
+  Enabled: true
+
+Lint/DuplicateMethods:
+  Enabled: true
+
+Lint/UnreachableCode:
+  Enabled: true
+
+Lint/Void:
+  Enabled: true
+
+Lint/IneffectiveAccessModifier:
+  Enabled: true
+
+Lint/UselessAccessModifier:
+  Enabled: true
+
+Rails/TimeZone:
+  Enabled: true
+
+Bundler/DuplicatedGem:
+  Enabled: true
+
+Bundler/InsecureProtocolSource:
+  Enabled: true
+
+Bundler/OrderedGems:
+  Enabled: true
+
+Layout/EndOfLine:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpecRails/HaveHttpStatus:
+  Enabled: false
+
