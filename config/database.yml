@@ -4,7 +4,7 @@
 #   gem install mysql2
 #
 # Ensure the MySQL gem is defined in your Gemfile
-#   gem "mysql2"
+#   gem 'mysql2'
 #
 # And be sure to use new-style password hashing:
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
@@ -12,17 +12,17 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DB_USERNAME") { "root" } %>
-  password: <%= ENV.fetch("DB_PASSWORD") { "root" } %>
-  host: <%= ENV.fetch("DB_HOST") { "127.0.0.1" } %>
+  pool: <%= Settings.try(:pool) || 5 %>
+  username: <%= Settings.try(:db_username) || 'root' %>
+  password: <%= Settings.try(:db_password) || 'root' %>
+  host: <%= Settings.try(:db_host) || '127.0.0.1' %>
 
 development:
   <<: *default
   database: api_development
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
+# Warning: The database defined as 'test' will be erased and
+# re-generated from your development database when you run 'rake'.
 # Do not set this db to the same as development or production.
 test:
   <<: *default
@@ -35,7 +35,7 @@ test:
 # Instead, provide the password or a full connection URL as an environment
 # variable when you boot the app. For example:
 #
-#   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
+#   DATABASE_URL='mysql2://myuser:mypass@localhost/somedatabase'
 #
 # If the connection URL is provided in the special DATABASE_URL environment
 # variable, Rails will automatically merge its configuration values on top of
@@ -43,7 +43,7 @@ test:
 # URL environment variable explicitly:
 #
 #   production:
-#     url: <%= ENV["MY_APP_DATABASE_URL"] %>
+#     url: <%= ENV['MY_APP_DATABASE_URL'] %>
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
@@ -53,7 +53,7 @@ production:
     <<: *default
     database: api_production
     username: api
-    password: <%= ENV["API_DATABASE_PASSWORD"] %>
+    password: <%= ENV['API_DATABASE_PASSWORD'] %>
   cache:
     <<: *primary_production
     database: api_production_cache
